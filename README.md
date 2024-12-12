@@ -1,6 +1,10 @@
 # AirSeal
-airgap automation tool 
-AirSeal - Automated Dependency Packaging Tool
+Automated Airgapping Dependency Packaging Tool
+
+- Currently Supports Python
+- Extending to other languages soon
+
+
 Project Setup and Installation
 Prerequisites
 

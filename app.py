@@ -3,7 +3,6 @@ import os
 import tempfile
 from dependency_analyzer import analyze_dependencies
 from docker_builder import DockerImageBuilder
-import subprocess   
 
 def main():
     st.title("AirSeal - Python Dependency Packager")
@@ -45,6 +44,9 @@ def main():
                             temp_file_path
                         )
                         output_path = builder.build_image()
+
+                        # Print the output path for debugging
+                        st.write(f"Generated Docker Image at: {output_path}")
                         
                         if output_path and os.path.exists(output_path):
                             st.success("Docker Image Generated Successfully!")
@@ -53,13 +55,14 @@ def main():
                             image_size = os.path.getsize(output_path) / (1024 * 1024)  # Convert to MB
                             st.info(f"Image size: {image_size:.2f} MB")
                             
-                            # Add download button
+                            # Add download button with the current working directory path
                             with open(output_path, 'rb') as f:
                                 st.download_button(
                                     label="Download Docker Image (.img)",
                                     data=f,
                                     file_name='airseal_image.img',
-                                    mime='application/octet-stream'
+                                    mime='application/octet-stream',
+                                    use_container_width=True
                                 )
                             
                             # Add usage instructions

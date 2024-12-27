@@ -3,9 +3,11 @@ import os
 import sys
 import pkg_resources
 from pipreqs import pipreqs
+import subprocess
+import tempfile
 import json
 from typing import Dict, List, Set
-import importlib
+
 
 class DependencyAnalyzer:
     def __init__(self, file_path: str):
@@ -44,9 +46,7 @@ class DependencyAnalyzer:
         """Use pipreqs to get package requirements with versions"""
         try:
             # Create a temporary directory for pipreqs output
-            import tempfile
             with tempfile.TemporaryDirectory() as temp_dir:
-                # Copy the target file to temp directory
                 import shutil
                 temp_file_path = os.path.join(temp_dir, os.path.basename(self.file_path))
                 shutil.copy2(self.file_path, temp_file_path)
@@ -84,6 +84,31 @@ class DependencyAnalyzer:
                 versions[package] = "not installed"
         return versions
 
+
+def get_all_dependencies(requirements: List[str]) -> List[str]:
+    """
+    Resolve all dependencies and their versions using pip-tools
+    """
+    try:
+        with tempfile.NamedTemporaryFile('w', delete=False) as req_file:
+            req_file.write('\n'.join(requirements))
+            req_path = req_file.name
+
+        # Use pip-tools to resolve dependencies
+        output = subprocess.check_output(
+            ['pip-compile', '--output-file=-', req_path],
+            universal_newlines=True
+        )
+        
+        # Parse resolved dependencies
+        resolved_dependencies = [
+            line for line in output.splitlines() if not line.startswith('#') and line.strip()
+        ]
+        return resolved_dependencies
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to resolve dependencies: {str(e)}")
+
+
 def analyze_dependencies(file_path: str) -> Dict:
     """
     Comprehensive dependency analysis
@@ -97,28 +122,18 @@ def analyze_dependencies(file_path: str) -> Dict:
         
         # Get package requirements with versions
         package_requirements = analyzer.get_package_requirements()
+
+        # Resolve all transitive dependencies
+        all_dependencies = get_all_dependencies(package_requirements)
         
         # Get installed versions
         installed_versions = analyzer.get_installed_versions(direct_imports)
         
         return {
             'direct_imports': direct_imports,
-            'package_requirements': package_requirements,
+            'package_requirements': all_dependencies,
             'installed_versions': installed_versions
         }
     
     except Exception as e:
         raise Exception(f"Dependency analysis failed: {str(e)}")
-
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Usage: python dependency_analyzer.py <python_file_path>")
-        sys.exit(1)
-    
-    file_path = sys.argv[1]
-    try:
-        deps = analyze_dependencies(file_path)
-        print(json.dumps(deps, indent=2))
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        sys.exit(1)

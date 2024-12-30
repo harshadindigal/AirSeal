@@ -1,16 +1,19 @@
-AirSeal
-Automated Airgapping Dependency Packaging Tool
+# AirSeal
+
+**Automated Airgapping Dependency Packaging Tool**  
 Easily package your Python dependencies into a Docker image for secure, airgapped environments.
 
-Features
-Currently Supports: Python
-Coming Soon: Support for additional programming languages
-🚀 Quick Start
-Clone the Repository
+### Features
+- **Currently Supports**: Python  
+- **Coming Soon**: Support for additional programming languages
 
-bash
-Copy code
-git clone https://github.com/harshadindigal/AirSeal
+---
+
+### 🚀 Quick Start
+
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/harshadindigal/AirSeal
 Set Up Your Virtual Environment
 
 For macOS/Linux:
@@ -58,4 +61,17 @@ Python 3.9+
 Docker
 pip
 git
+markdown
+Copy code
+
+### Key Points:
+- Code blocks are properly enclosed in triple backticks (\`\`\`).
+- Lists and headers use markdown syntax (e.g., `-` for bullet points and `###` for headings).
+- No extra spacing is used where it could break formatting on GitHub, but sections are clearly divided.
+
+This should display well-formatted content on your GitHub page.
+
+
+
+
 

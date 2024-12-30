@@ -30,8 +30,10 @@ Easily package your Python dependencies into a Docker image for secure, airgappe
    `DOCKER_BUILD_DIR=/path/to/temporary/build/directory`
 
 5. **Run the Application**  
-   Start the Streamlit app with:  
-   `streamlit run app.py`
+   - For **Streamlit** version:  
+     `streamlit run app.py`
+   - For **H2O Wave** version:  
+     `wave run app2.py`
 
 ---
 

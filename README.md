@@ -39,9 +39,9 @@ Easily package your code dependencies into a Docker image for secure, airgapped 
 
 ### 🛠 Development Scripts
 
-- `analyze_dependencies.py`: Analyze and list project dependencies.
+- `dependency_analyzer.py`: Analyze and list project dependencies.
 - `docker_builder.py`: Generate a Docker image with your dependencies.
-- `requirements_generator.py`: Extract and manage dependencies.
+- `app.py`: UI for users to upload their code/download docker image
 
 ---
 

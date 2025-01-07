@@ -1,7 +1,7 @@
 # AirSeal
 
 **Automated Airgapping Dependency Packaging Tool**  
-Easily package your Python dependencies into a Docker image for secure, airgapped environments.
+Easily package your code dependencies into a Docker image for secure, airgapped environments.
 
 ### Features
 - **Currently Supports**: Python  

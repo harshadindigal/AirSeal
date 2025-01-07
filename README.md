@@ -47,7 +47,7 @@ Easily package your code dependencies into a Docker image for secure, airgapped 
 
 ### 📦 Usage Workflow
 
-1. **Upload your Python file**
+1. **Upload your code file**
 2. **View detected dependencies**
 3. **Generate Docker image**
 4. **Download or use the generated Docker image**

@@ -4,7 +4,7 @@
 Easily package your code dependencies into a Docker image for secure, airgapped environments.
 
 ### Features
-- **Currently Supports**: Python  
+- **Currently Supports**: Python, Java, Javascript, Go, Rust 
 - **Coming Soon**: Support for additional programming languages
 
 ---
